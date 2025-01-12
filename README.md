@@ -1,5 +1,7 @@
 # threatMap
 
+![threatMap Screenshot](screenshot.png)
+
 Digital security has become essential in our interconnected world, yet many people find it overwhelming to protect their online presence - threatMap bridges this gap by providing a simple, visual way to understand and improve your digital security posture.
 
 threatMap is a minimalistic web tool that helps visualize and improve your digital security posture by mapping authentication methods across your connected accounts.

@@ -4,6 +4,8 @@
 
 Digital security has become essential in our interconnected world, yet many people find it overwhelming to protect their online presence - threatMap bridges this gap by providing a simple, visual way to understand and improve your digital security posture.
 
+Maintaining a good digital posture is crucial as cyber attacks, such as phishing scams, ransomware, and social engineering, grow more frequent and sophisticated, exploiting even minor lapses in vigilance. Many attacks are easy to fall for—for instance, receiving an email that appears to be from your bank, urgently asking you to verify your account by clicking a link, which leads to a fake login page designed to steal your credentials. The elderly and those less technically aware are particularly vulnerable to such attacks, as they may lack familiarity with digital red flags, like misspelt URLs or suspicious sender addresses, making them prime targets for cybercriminals.
+
 threatMap is a minimalistic web tool that helps visualize and improve your digital security posture by mapping authentication methods across your connected accounts.
 
 ## Overview

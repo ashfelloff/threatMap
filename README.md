@@ -84,3 +84,11 @@ Core Components:
 - **Notifications**: CSS-animated toast notifications
 - **Export**: Native JavaScript Blob and File APIs
 
+## 📝 License
+
+This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT)  .
+
+## Credits
+
+Developed by [ashfelloff](https://github.com/ashfelloff)
+

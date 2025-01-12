@@ -1,0 +1,389 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.threat-map {
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    position: relative;
+}
+
+.canvas-title {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    color: #333;
+    z-index: 1;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.action-links {
+    position: absolute;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    text-align: center;
+    pointer-events: auto;
+}
+
+.action-link {
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.action-link:hover {
+    opacity: 1;
+}
+
+.action-link.add {
+    color: #2196F3;
+    border-bottom: 2px solid #2196F3;
+}
+
+.action-link.report {
+    color: #4CAF50;
+    border-bottom: 2px solid #4CAF50;
+}
+
+.action-separator {
+    margin: 0 1rem;
+    color: #666;
+    opacity: 0.5;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    z-index: 1001;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    fill: none;
+    stroke-width: 3px;
+}
+
+.node text {
+    font-size: 12px;
+    fill: currentColor;
+}
+
+.link {
+    fill: none;
+    stroke: #999;
+    stroke-width: 1px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* CASMM Level Colors */
+.node.passless {
+    color: #00C853;
+}
+.node.codeless2fa {
+    color: #00E676;
+}
+.node.app2fa {
+    color: #69F0AE;
+}
+.node.sms2fa {
+    color: #40C4FF;
+}
+.node.passman {
+    color: #FFD740;
+}
+.node.qualpass {
+    color: #FFAB40;
+}
+.node.uniqpass {
+    color: #FF5252;
+}
+.node.sharpass {
+    color: #FF1744;
+}
+
+/* Custom Select Styling */
+.custom-select {
+    position: relative;
+    margin: 10px 0;
+}
+
+.select-selected {
+    background-color: #f5f5f5;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.select-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.select-hide {
+    display: none;
+}
+
+.select-category {
+    padding: 8px 12px;
+    background: #f0f0f0;
+    font-weight: 500;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.select-option {
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #eee;
+}
+
+.select-option:hover {
+    background-color: #f8f8f8;
+}
+
+.option-name {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.option-desc {
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* Service-specific colors */
+.select-option[data-name="Gmail"] .option-name { color: #EA4335; }  /* Google Red */
+.select-option[data-name="Microsoft"] .option-name { color: #05a6f0; }  /* Microsoft Blue */
+.select-option[data-name="Apple ID"] .option-name { color: #A2AAAD; }  /* Apple Gray */
+.select-option[data-name="Steam"] .option-name { color: #1b2838; }  /* Steam Dark Blue */
+.select-option[data-name="Discord"] .option-name { color: #5865F2; }  /* Discord Blurple */
+.select-option[data-name="Netflix"] .option-name { color: #E50914; }  /* Netflix Red */
+.select-option[data-name="Spotify"] .option-name { color: #1ED760; }  /* Spotify Green */
+
+button.action-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    outline: inherit;
+}
+
+.action-link.add {
+    color: #2196F3;
+    border-bottom: 2px solid #2196F3;
+}
+
+.action-link.report {
+    color: #4CAF50;
+    border-bottom: 2px solid #4CAF50;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-action {
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    color: #666;
+    padding: 0 0.5rem;
+}
+
+.modal-action:hover {
+    opacity: 1;
+    color: #2196F3;
+    transform: scale(1.1);
+}
+
+.custom-option input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+/* Security Level Colors - More vibrant and cohesive */
+.level-8 { color: #00C853; }  /* Bright Green */
+.level-7 { color: #00E676; }  /* Light Green */
+.level-6 { color: #69F0AE; }  /* Mint Green */
+.level-5 { color: #40C4FF; }  /* Light Blue */
+.level-4 { color: #FFD740; }  /* Gold */
+.level-3 { color: #FFAB40; }  /* Light Orange */
+.level-2 { color: #FF5252; }  /* Light Red */
+.level-1 { color: #FF1744; }  /* Bright Red */
+
+/* Node colors for the graph */
+.node.passless circle { fill: #00C853; }
+.node.codeless2fa circle { fill: #00E676; }
+.node.app2fa circle { fill: #69F0AE; }
+.node.sms2fa circle { fill: #40C4FF; }
+.node.passman circle { fill: #FFD740; }
+.node.qualpass circle { fill: #FFAB40; }
+.node.uniqpass circle { fill: #FF5252; }
+.node.sharpass circle { fill: #FF1744; }
+
+/* Link colors based on relationship */
+.link.root-link {
+    stroke: #5865F2;
+    stroke-width: 2px;
+    stroke-dasharray: none;
+}
+
+.link.service-link {
+    stroke: #1ED760;
+    stroke-width: 2px;
+    stroke-dasharray: 5,5;
+}
+
+/* Account type colors */
+.type-root { color: #5865F2; }    /* Discord Blue */
+.type-linked { color: #1ED760; }  /* Spotify Green */
+.type-service { color: #EA4335; } /* Google Red */
+
+/* Node sizing based on type */
+.node.root circle {
+    stroke: #5865F2;
+    stroke-width: 3px;
+}
+
+.node.linked circle {
+    stroke: #1ED760;
+    stroke-width: 2px;
+}
+
+.node.service circle {
+    stroke: #EA4335;
+    stroke-width: 2px;
+}
+
+.custom-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-option input {
+    flex-grow: 1;
+}
+
+.confirm-custom {
+    display: block;
+    color: #4CAF50;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    opacity: 0.3;
+    transition: all 0.2s ease;
+    transform: scale(1);
+}
+
+.confirm-custom:hover {
+    color: #45a049;
+    transform: scale(1.2);
+}
+
+.confirm-custom.visible {
+    opacity: 1;
+}
+
+.parent-select {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.parent-select .select-selected {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+    color: #999;
+}
+
+.parent-select::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.parent-select.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.parent-select.visible::before {
+    display: none;
+}
+
+.parent-select.visible .select-selected {
+    background-color: #f5f5f5;
+    cursor: pointer;
+} 
